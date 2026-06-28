@@ -37,28 +37,28 @@ jobs:
           if [ -n "${SFTP_HOST:-}" ] && [ -n "${SFTP_USERNAME:-}" ] && [ -n "${SFTP_PASSWORD:-}" ]; then
             python -m pip install --quiet paramiko
             python <<'PY'
-import json
-import os
-import paramiko
+          import json
+          import os
+          import paramiko
 
-host = os.environ["SFTP_HOST"]
-port = int(os.environ.get("SFTP_PORT") or "2022")
-username = os.environ["SFTP_USERNAME"]
-password = os.environ["SFTP_PASSWORD"]
-remote_path = os.environ.get("SFTP_STATUS_PATH") or "plugins/CannaSMPStatsAPI/website-export/server-status.json"
+          host = os.environ["SFTP_HOST"]
+          port = int(os.environ.get("SFTP_PORT") or "2022")
+          username = os.environ["SFTP_USERNAME"]
+          password = os.environ["SFTP_PASSWORD"]
+          remote_path = os.environ.get("SFTP_STATUS_PATH") or "plugins/CannaSMPStatsAPI/website-export/server-status.json"
 
-transport = paramiko.Transport((host, port))
-transport.connect(username=username, password=password)
-sftp = paramiko.SFTPClient.from_transport(transport)
-with sftp.open(remote_path, "r") as remote_file:
-    payload = json.loads(remote_file.read().decode("utf-8"))
-sftp.close()
-transport.close()
+          transport = paramiko.Transport((host, port))
+          transport.connect(username=username, password=password)
+          sftp = paramiko.SFTPClient.from_transport(transport)
+          with sftp.open(remote_path, "r") as remote_file:
+              payload = json.loads(remote_file.read().decode("utf-8"))
+          sftp.close()
+          transport.close()
 
-with open("data/server-status.json", "w", encoding="utf-8") as local_file:
-    json.dump(payload, local_file, indent=2, sort_keys=True)
-    local_file.write("\n")
-PY
+          with open("data/server-status.json", "w", encoding="utf-8") as local_file:
+              json.dump(payload, local_file, indent=2, sort_keys=True)
+              local_file.write("\n")
+          PY
           else
             API_URL="${MANUAL_API_URL:-${CONFIGURED_API_URL:-$DEFAULT_API_URL}}"
             curl --fail --silent --show-error --max-time 20 "$API_URL" -o data/server-status.json
