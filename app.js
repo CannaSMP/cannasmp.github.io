@@ -1,4 +1,4 @@
-const statusPath = window.location.pathname.includes("/leaderboard/")
+const statusPath = window.location.pathname.includes("/leaderboard/") || window.location.pathname.includes("/stats/")
   ? "../data/server-status.json"
   : "data/server-status.json";
 

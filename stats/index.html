@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CannaSMP live Minecraft server status, player lookup, commands, and public stats.">
+  <title>CannaSMP | Server Stats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260628-pages1">
+</head>
+<body class="portal-page">
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="CannaSMP home">
+      <img src="../assets/cannasmp-logo.png" alt="CannaSMP logo">
+      <span>CannaSMP</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="../">Home</a>
+      <a class="is-active" href="./">Stats</a>
+      <a href="../leaderboard/">Leaderboard</a>
+      <a href="#players">Players</a>
+      <a href="#commands">Commands</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="dashboard-hero">
+      <div>
+        <p class="eyebrow">Live Minecraft Server</p>
+        <h1>CannaSMP Stats</h1>
+        <p class="hero-text">Public server monitor for players, worlds, performance, and quick CannaSMP tools.</p>
+      </div>
+      <div class="join-box">
+        <span>Server Address</span>
+        <button class="copy-ip" type="button" data-copy="cannasmp.smpserver.net">
+          <strong>cannasmp.smpserver.net</strong>
+          <small class="copy-label">Click to copy</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="status-grid" data-live-status>
+      <article class="metric-card status-card">
+        <span>Status</span>
+        <strong data-status-online>Loading</strong>
+      </article>
+      <article class="metric-card">
+        <span>Players</span>
+        <strong data-status-players>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>TPS</span>
+        <strong data-status-tps>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>MSPT</span>
+        <strong data-status-mspt>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>RAM</span>
+        <strong data-status-ram>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>CPU</span>
+        <strong data-status-cpu>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>Uptime</span>
+        <strong data-status-uptime>--</strong>
+      </article>
+      <article class="metric-card">
+        <span>Version</span>
+        <strong data-status-version>--</strong>
+      </article>
+    </section>
+
+    <section class="two-column" id="players">
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Lookup</p>
+            <h2>Find a Player</h2>
+          </div>
+        </div>
+        <form class="lookup-form" data-player-search>
+          <input type="search" name="player" placeholder="Username or UUID" autocomplete="off">
+          <button type="submit">Search</button>
+        </form>
+        <div class="lookup-result" data-player-result>
+          Search the latest public snapshot.
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Online Now</p>
+            <h2>Players</h2>
+          </div>
+          <a class="text-link" href="../leaderboard/">View leaderboard</a>
+        </div>
+        <div class="player-table" data-status-player-list>
+          <span>Waiting for server snapshot.</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="two-column">
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Worlds</p>
+            <h2>Live Worlds</h2>
+          </div>
+        </div>
+        <div class="world-table" data-status-worlds>
+          <span>Waiting for server snapshot.</span>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Systems</p>
+            <h2>Integrations</h2>
+          </div>
+        </div>
+        <div class="integration-list" data-status-integrations>
+          <span>Waiting for server snapshot.</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" id="commands">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Commands</p>
+          <h2>Useful CannaSMP Commands</h2>
+        </div>
+      </div>
+      <div class="command-grid">
+        <code>/menu</code>
+        <code>/spawn</code>
+        <code>/rtp</code>
+        <code>/afk</code>
+        <code>/shards</code>
+        <code>/shardshop</code>
+        <code>/leaderboard</code>
+        <code>/shop</code>
+        <code>/warp crates</code>
+        <code>/warp afk</code>
+        <code>/ah</code>
+        <code>/pay</code>
+      </div>
+    </section>
+
+    <p class="snapshot-note" data-status-updated>No live snapshot has been published yet.</p>
+  </main>
+
+  <footer class="footer">
+    <span>CannaSMP</span>
+    <a href="../">Home</a>
+    <a href="https://github.com/CannaSMP">GitHub</a>
+  </footer>
+
+  <script src="../app.js?v=20260628-pages1"></script>
+</body>
+</html>
