@@ -1,0 +1,80 @@
+name: Update Server Status
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: "Optional public status API URL override"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      DEFAULT_API_URL: "http://130.12.156.44:8080/api/v1/public"
+      CONFIGURED_API_URL: ${{ vars.SERVER_STATUS_URL }}
+      MANUAL_API_URL: ${{ inputs.api_url }}
+      SFTP_HOST: ${{ secrets.CANNASMP_SFTP_HOST }}
+      SFTP_PORT: ${{ secrets.CANNASMP_SFTP_PORT }}
+      SFTP_USERNAME: ${{ secrets.CANNASMP_SFTP_USERNAME }}
+      SFTP_PASSWORD: ${{ secrets.CANNASMP_SFTP_PASSWORD }}
+      SFTP_STATUS_PATH: ${{ secrets.CANNASMP_SFTP_STATUS_PATH }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch server status
+        run: |
+          set -euo pipefail
+          mkdir -p data
+
+          if [ -n "${SFTP_HOST:-}" ] && [ -n "${SFTP_USERNAME:-}" ] && [ -n "${SFTP_PASSWORD:-}" ]; then
+            python -m pip install --quiet paramiko
+            python <<'PY'
+import json
+import os
+import paramiko
+
+host = os.environ["SFTP_HOST"]
+port = int(os.environ.get("SFTP_PORT") or "2022")
+username = os.environ["SFTP_USERNAME"]
+password = os.environ["SFTP_PASSWORD"]
+remote_path = os.environ.get("SFTP_STATUS_PATH") or "plugins/CannaSMPStatsAPI/website-export/server-status.json"
+
+transport = paramiko.Transport((host, port))
+transport.connect(username=username, password=password)
+sftp = paramiko.SFTPClient.from_transport(transport)
+with sftp.open(remote_path, "r") as remote_file:
+    payload = json.loads(remote_file.read().decode("utf-8"))
+sftp.close()
+transport.close()
+
+with open("data/server-status.json", "w", encoding="utf-8") as local_file:
+    json.dump(payload, local_file, indent=2, sort_keys=True)
+    local_file.write("\n")
+PY
+          else
+            API_URL="${MANUAL_API_URL:-${CONFIGURED_API_URL:-$DEFAULT_API_URL}}"
+            curl --fail --silent --show-error --max-time 20 "$API_URL" -o data/server-status.json
+            python -m json.tool data/server-status.json > /tmp/server-status.pretty.json
+            mv /tmp/server-status.pretty.json data/server-status.json
+          fi
+
+      - name: Commit updated status
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/server-status.json; then
+            echo "No status changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/server-status.json
+          git commit -m "Update live server status"
+          git push
