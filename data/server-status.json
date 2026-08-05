@@ -13,107 +13,107 @@
     "minecraftVersion": "1.21.11",
     "motd": "A Minecraft Server",
     "mspt": {
-      "average": 0.35,
-      "max": 1.32,
-      "min": 0.08
+      "average": 0.49,
+      "max": 5.4,
+      "min": 0.11
     },
     "online": true,
     "publicHost": "130.12.156.44",
     "restartTime": null,
     "tickUsage": {
-      "percentOfTickBudget": 0.7
+      "percentOfTickBudget": 0.98
     },
     "tps": {
       "fifteenMinute": 20.0,
       "fiveMinute": 20.0,
       "oneMinute": 20.0
     },
-    "uptimeSeconds": 199529,
+    "uptimeSeconds": 206594,
     "version": "1.21.11-69-94d0c97 (MC: 1.21.11)",
     "worlds": [
       {
         "environment": "NORMAL",
-        "fullTime": 72959765,
+        "fullTime": 73101065,
         "loadedChunks": 0,
         "name": "world",
         "players": 0,
-        "time": 23765,
+        "time": 21065,
         "weather": "CLEAR"
       },
       {
         "environment": "NETHER",
-        "fullTime": 72957169,
+        "fullTime": 73098469,
         "loadedChunks": 0,
         "name": "world_nether",
         "players": 0,
-        "time": 21169,
+        "time": 18469,
         "weather": "CLEAR"
       },
       {
         "environment": "THE_END",
-        "fullTime": 72957169,
+        "fullTime": 73098469,
         "loadedChunks": 0,
         "name": "world_the_end",
         "players": 0,
-        "time": 21169,
+        "time": 18469,
         "weather": "CLEAR"
       },
       {
         "environment": "NORMAL",
-        "fullTime": 67642517,
+        "fullTime": 67783817,
         "loadedChunks": 0,
         "name": "afk",
         "players": 0,
-        "time": 10517,
+        "time": 7817,
         "weather": "CLEAR"
       },
       {
         "environment": "NORMAL",
-        "fullTime": 123669405,
+        "fullTime": 123810705,
         "loadedChunks": 0,
         "name": "Koth",
         "players": 0,
-        "time": 21405,
+        "time": 18705,
         "weather": "CLEAR"
       },
       {
         "environment": "NORMAL",
-        "fullTime": 72925843,
+        "fullTime": 73067143,
         "loadedChunks": 20,
         "name": "Spawn",
         "players": 0,
-        "time": 13843,
-        "weather": "CLEAR"
+        "time": 11143,
+        "weather": "THUNDER"
       },
       {
         "environment": "NORMAL",
-        "fullTime": 71540871,
+        "fullTime": 71682171,
         "loadedChunks": 0,
         "name": "test",
         "players": 0,
-        "time": 20871,
+        "time": 18171,
         "weather": "CLEAR"
       }
     ]
   },
-  "snapshotTime": "2026-08-05T09:50:08.679681111Z",
+  "snapshotTime": "2026-08-05T11:47:53.680658841Z",
   "system": {
     "cpu": {
       "cores": 4,
-      "processLoad": 0.42,
-      "systemLoad": 0.57
+      "processLoad": 0.83,
+      "systemLoad": 0.82
     },
     "jvm": {
       "heapCommittedBytes": 2264924160,
       "heapMaxBytes": 8174698496,
-      "heapUsedBytes": 1728903840,
-      "threadCount": 208
+      "heapUsedBytes": 2020802728,
+      "threadCount": 205
     },
     "ram": {
       "allocatedBytes": 2264924160,
-      "freeBytes": 532630656,
+      "freeBytes": 241113192,
       "maxBytes": 8174698496,
-      "usedBytes": 1732293504
+      "usedBytes": 2023810968
     }
   }
 }
